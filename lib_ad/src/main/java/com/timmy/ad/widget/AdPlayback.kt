@@ -7,7 +7,7 @@ import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.RelativeLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.google.ads.interactivemedia.v3.api.AdPodInfo
@@ -22,7 +22,7 @@ import java.util.*
 
 // 從 google ima github sample code 複製過來並轉為 kotlin 並把和 ad 無關的程式碼移除。
 // https://github.com/googleads/googleads-ima-android/blob/master/AdvancedExample/app/src/main/java/com/google/ads/interactivemedia/v3/samples/videoplayerapp/VideoPlayerWithAdPlayback.java
-class AdPlayback : ConstraintLayout {
+class AdPlayback : RelativeLayout {
 
     // The SDK will render ad playback UI elements into this ViewGroup.
     val adUiContainer: ViewGroup
