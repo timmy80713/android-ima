@@ -36,4 +36,7 @@ interface VideoPlayer {
 
     /** Remove a player callback from getting notified on video events.  */
     fun removePlayerCallback(callback: VideoPlayerCallback)
+
+    /** Detect video size changed callback */
+    fun setOnVideoSizeChangedBlock(onVideoSizeChangedBlock: ((width: Int, height: Int) -> Unit))
 }

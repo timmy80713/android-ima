@@ -16,6 +16,7 @@ class SampleVideoPlayer : VideoView, VideoPlayer {
 
     private var playbackState: PlaybackState? = null
     private val videoPlayerCallbacks = HashSet<VideoPlayerCallback>()
+    private var onVideoSizeChangedBlock: ((width: Int, height: Int) -> Unit)? = null
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -24,6 +25,12 @@ class SampleVideoPlayer : VideoView, VideoPlayer {
     init {
         playbackState = PlaybackState.STOPPED
         setMediaController(null)
+
+        super.setOnPreparedListener {
+            it.setOnVideoSizeChangedListener { mp, width, height ->
+                onVideoSizeChangedBlock?.invoke(width, height)
+            }
+        }
 
         // Set OnCompletionListener to notify our callbacks when the video is completed.
         super.setOnCompletionListener {
@@ -43,6 +50,11 @@ class SampleVideoPlayer : VideoView, VideoPlayer {
             // prevent the completion handler from being called.
             true
         }
+    }
+
+    override fun setOnPreparedListener(l: MediaPlayer.OnPreparedListener?) {
+        // The setOnPreparedListener can only be implemented by SampleVideoPlayer.
+        throw UnsupportedOperationException()
     }
 
     override fun setOnCompletionListener(listener: MediaPlayer.OnCompletionListener) {
@@ -105,5 +117,9 @@ class SampleVideoPlayer : VideoView, VideoPlayer {
 
     override fun removePlayerCallback(callback: VideoPlayerCallback) {
         videoPlayerCallbacks.remove(callback)
+    }
+
+    override fun setOnVideoSizeChangedBlock(onVideoSizeChangedBlock: (width: Int, height: Int) -> Unit) {
+        this.onVideoSizeChangedBlock = onVideoSizeChangedBlock
     }
 }
