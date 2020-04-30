@@ -5,12 +5,21 @@
     android:layout_height="match_parent"
     tools:parentTag="android.widget.RelativeLayout">
 
-    <com.timmy.ad.widget.player.SampleVideoPlayer
-        android:id="@+id/view_ad_playback_player"
-        android:layout_width="wrap_content"
+    <com.timmy.ad.widget.AspectRatioFrameLayout
+        android:id="@+id/view_ad_playback_aspect_ratio_layout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:foreground="#3300FF00">
+
+        <com.timmy.ad.widget.player.SampleVideoPlayer
+            android:id="@+id/view_ad_playback_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </com.timmy.ad.widget.AspectRatioFrameLayout>
 
     <FrameLayout
         android:id="@+id/view_ad_playback_container"

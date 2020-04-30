@@ -206,7 +206,7 @@ class AdInteractiveMedia(
 
                         adBanner.run {
                             setImageDrawable(ContextCompat.getDrawable(params.context, R.drawable.vector_ad_banner))
-                            isVisible = true
+                            isVisible = false
                             setOnClickListener {
                                 interactionCallback.onVideoFakeClicked(response)
                             }

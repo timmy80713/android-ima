@@ -57,7 +57,7 @@ class AdPlayback : RelativeLayout {
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_ad_playback, this, true)
-        setBackgroundColor(Color.parseColor("#80FF0000"))
+        setBackgroundColor(Color.parseColor("#33FF0000"))
         videoPlayer = view_ad_playback_player
         adUiContainer = view_ad_playback_container
     }
@@ -127,6 +127,11 @@ class AdPlayback : RelativeLayout {
             override fun addCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
                 adCallbacks.add(videoAdPlayerCallback)
             }
+        }
+
+        videoPlayer.setOnVideoSizeChangedBlock { width, height ->
+            val videoAspectRatio = 1F * width / height
+            view_ad_playback_aspect_ratio_layout.setAspectRatio(videoAspectRatio)
         }
 
         // Set player callbacks for delegating major video events.
