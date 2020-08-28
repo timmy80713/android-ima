@@ -38,7 +38,7 @@ class SampleVideoPlayer : VideoView, VideoPlayer {
             it.reset()
             it.setDisplay(holder)
             playbackState = PlaybackState.STOPPED
-            videoPlayerCallbacks.forEach { callback -> callback.onCompleted() }
+            videoPlayerCallbacks.forEach { callback -> callback.onComplete() }
         }
 
         // Set OnErrorListener to notify our callbacks if the video errors.

@@ -154,7 +154,7 @@ class AdPlayback : RelativeLayout {
                 }
             }
 
-            override fun onCompleted() {
+            override fun onComplete() {
                 if (isAdDisplayed) {
                     adCallbacks.forEach { it.onEnded(adMediaInfo) }
                 }

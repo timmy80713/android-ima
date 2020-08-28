@@ -15,7 +15,7 @@ interface VideoPlayerCallback {
     fun onResume()
 
     /** Called when the current video has completed playback to the end of the video.  */
-    fun onCompleted()
+    fun onComplete()
 
     /** Called when an error occurs during video playback.  */
     fun onError()

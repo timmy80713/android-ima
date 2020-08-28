@@ -279,7 +279,6 @@ class AdInteractiveMedia(
         adsLoader?.apply {
             removeAdsLoadedListener(vastLoadedListener)
             removeAdErrorListener(vastErrorListener)
-            contentComplete()
         }
     }
 
