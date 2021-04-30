@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:foreground="#3300FF00">
+        android:foreground="#80FF00FF">
 
         <com.timmy.ad.widget.player.SampleVideoPlayer
             android:id="@+id/view_ad_playback_player"
@@ -23,8 +23,12 @@
 
     <FrameLayout
         android:id="@+id/view_ad_playback_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignStart="@+id/view_ad_playback_aspect_ratio_layout"
+        android:layout_alignTop="@+id/view_ad_playback_aspect_ratio_layout"
+        android:layout_alignEnd="@+id/view_ad_playback_aspect_ratio_layout"
+        android:layout_alignBottom="@+id/view_ad_playback_aspect_ratio_layout" />
 
     <ProgressBar
         android:id="@+id/view_ad_playback_progress"

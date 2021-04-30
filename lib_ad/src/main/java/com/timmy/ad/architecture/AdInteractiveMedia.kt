@@ -28,9 +28,9 @@ class AdInteractiveMedia(
     private val ERROR_NO_VAST_AD_TAG_RUL_SPECIFIED_CODE = -1
     private val ERROR_NO_VAST_AD_TAG_RUL_SPECIFIED_MESSAGE = "No VAST ad tag URL specified"
 
-    private var adView = LayoutInflater.from(params.context).inflate(R.layout.ad_player_interactive_media, null)
-    private var adPlayback = adView.ad_player_interactive_media_playback
-    private var adBanner = adView.ad_player_interactive_media_banner
+    private val adView = LayoutInflater.from(params.context).inflate(R.layout.ad_player_interactive_media, null)
+    private val adPlayback = adView.ad_player_interactive_media_playback
+    private val adBanner = adView.ad_player_interactive_media_banner
 
     // The AdsLoader instance exposes the requestAds method.
     private var adsLoader: AdsLoader? = null
@@ -242,6 +242,8 @@ class AdInteractiveMedia(
                     interactionCallback.onVideoComplete(response)
                 }
                 AdEvent.AdEventType.ALL_ADS_COMPLETED -> {
+                    invalidateLoadVAST()
+                    invalidateLoadSource()
                     interactionCallback.onVideoAllComplete(response)
                     release()
                 }

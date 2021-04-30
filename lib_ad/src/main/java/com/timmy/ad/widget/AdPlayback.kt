@@ -57,7 +57,7 @@ class AdPlayback : RelativeLayout {
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_ad_playback, this, true)
-        setBackgroundColor(Color.parseColor("#33FF0000"))
+        setBackgroundColor(Color.parseColor("#80FF0000"))
         videoPlayer = view_ad_playback_player
         adUiContainer = view_ad_playback_container
     }
@@ -73,14 +73,14 @@ class AdPlayback : RelativeLayout {
 
         // Define VideoAdPlayer connector.
         videoAdPlayer = object : VideoAdPlayer {
-            override fun loadAd(adMediaInfo: AdMediaInfo, adPodInfo: AdPodInfo) {
+            override fun loadAd(adMediaInfo: AdMediaInfo?, adPodInfo: AdPodInfo?) {
                 view_ad_playback_progress.isVisible = true
                 this@AdPlayback.adMediaInfo = adMediaInfo
                 isAdDisplayed = false
-                videoPlayer.setVideoPath(adMediaInfo.url)
+                videoPlayer.setVideoPath(adMediaInfo!!.url)
             }
 
-            override fun playAd(adMediaInfo: AdMediaInfo) {
+            override fun playAd(adMediaInfo: AdMediaInfo?) {
                 startTracking()
                 if (isAdDisplayed) {
                     videoPlayer.resume()
@@ -90,12 +90,12 @@ class AdPlayback : RelativeLayout {
                 }
             }
 
-            override fun pauseAd(adMediaInfo: AdMediaInfo) {
+            override fun pauseAd(adMediaInfo: AdMediaInfo?) {
                 stopTracking()
                 videoPlayer.pause()
             }
 
-            override fun stopAd(adMediaInfo: AdMediaInfo) {
+            override fun stopAd(adMediaInfo: AdMediaInfo?) {
                 stopTracking()
                 videoPlayer.stopPlayback()
             }
@@ -112,7 +112,9 @@ class AdPlayback : RelativeLayout {
                             view_ad_playback_progress.isGone = true
                         }
                     }
-                    return VideoProgressUpdate(videoPlayer.getCurrentPosition().toLong(), videoPlayer.getDuration().toLong())
+                    val currentPosition = videoPlayer.getCurrentPosition().toLong()
+                    val duration = videoPlayer.getDuration().toLong()
+                    return VideoProgressUpdate(currentPosition, duration)
                 }
             }
 
@@ -120,12 +122,12 @@ class AdPlayback : RelativeLayout {
                 return videoPlayer.getVolume()
             }
 
-            override fun removeCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
-                adCallbacks.remove(videoAdPlayerCallback)
+            override fun removeCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback?) {
+                videoAdPlayerCallback?.run { adCallbacks.remove(this) }
             }
 
-            override fun addCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
-                adCallbacks.add(videoAdPlayerCallback)
+            override fun addCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback?) {
+                videoAdPlayerCallback?.run { adCallbacks.add(this) }
             }
         }
 
